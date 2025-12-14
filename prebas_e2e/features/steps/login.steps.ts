@@ -1,17 +1,15 @@
 import {Given, When, Then} from "@cucumber/cucumber";
-import { chromium, Browser, Page, expect } from "@playwright/test";
+import { chromium, expect } from "@playwright/test";
 import {LoginPage} from "../../pages/LoginPage";
 import { setDefaultTimeout } from "@cucumber/cucumber";
 setDefaultTimeout(30 * 1000);
 
-let browser: Browser;
-let page: Page;
 let loginPage: LoginPage;
 
 Given ("I access the movie website", async function () {
-    browser = await chromium.launch({headless: false})
-    page = await browser.newPage();
-    loginPage = new LoginPage(page);
+    this.browser = await chromium.launch({headless: false})
+    this.page = await this.browser.newPage();
+    loginPage = new LoginPage(this.page);
     await loginPage.open();
 });
 
@@ -20,7 +18,7 @@ When ("I search for {string} in the search engine", async function (movie: strin
 });   
 
 When("I click the search button", async function () {
-  await loginPage.clickSearchButton();
+    await loginPage.clickSearchButton();
 });
 
 When("I select the movie {string} from results", async function (movie: string) {
@@ -40,6 +38,5 @@ Then ("the director {string} appears", async function (director: string) {
 Then ("the film has a rating higher than {float}", async function (rating: number) {
     const pageRating = await loginPage.getRating();
     expect(pageRating > rating);
-    await browser.close(); 
 });
         
