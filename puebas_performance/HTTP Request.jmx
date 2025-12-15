@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">120</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <stringProp name="HTTPSampler.domain">api.weatherapi.com</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/v1/forecast.json</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="key" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">082660052cdb413ca0f04613251512</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="HTTPArgument.content_type">text/plain</stringProp>
+                <stringProp name="Argument.name">key</stringProp>
+              </elementProp>
+              <elementProp name="q" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${city}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">q</stringProp>
+              </elementProp>
+              <elementProp name="dt" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">2025-12-24</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">dt</stringProp>
+              </elementProp>
+              <elementProp name="days" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">1</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">days</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">5000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\Users\beluf\OneDrive\3er año\Reto 3\practico_reto3\puebas_performance\HTTP Request.jmx</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">cities.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">city</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\Users\beluf\OneDrive\3er año\Reto 3\practico_reto3\puebas_performance\summary_report</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\Users\beluf\OneDrive\3er año\Reto 3\practico_reto3\puebas_performance\aggregate_report</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1765763550021,658,HTTP Request,200,OK,Thread Group 1-1,text,true,,19265,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,638,0,406
+1765763551128,332,HTTP Request,200,OK,Thread Group 1-2,text,true,,19298,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,301,0,38
+1765763552325,472,HTTP Request,200,OK,Thread Group 1-3,text,true,,19199,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,440,0,35
+1765763553524,330,HTTP Request,200,OK,Thread Group 1-4,text,true,,19201,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,271,0,37
+1765763554723,285,HTTP Request,200,OK,Thread Group 1-5,text,true,,19267,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,257,0,34
+1765763555925,315,HTTP Request,200,OK,Thread Group 1-6,text,true,,19238,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,263,0,37
+1765763557110,309,HTTP Request,400,Bad Request,Thread Group 1-7,text,false,,657,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,308,0,77
+1765763558312,255,HTTP Request,400,Bad Request,Thread Group 1-8,text,false,,658,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,255,0,33
+1765763559511,256,HTTP Request,400,Bad Request,Thread Group 1-9,text,false,,657,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,256,0,33
+1765763560708,256,HTTP Request,400,Bad Request,Thread Group 1-10,text,false,,657,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,256,0,32
+1765763561909,104,HTTP Request,200,OK,Thread Group 1-11,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,75,0,30
+1765763563117,109,HTTP Request,200,OK,Thread Group 1-12,text,true,,19301,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,78,0,43
+1765763564320,107,HTTP Request,200,OK,Thread Group 1-13,text,true,,19188,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,76,0,40
+1765763565520,110,HTTP Request,200,OK,Thread Group 1-14,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,74,0,40
+1765763566701,97,HTTP Request,200,OK,Thread Group 1-15,text,true,,19249,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,68,0,35
+1765763567919,120,HTTP Request,200,OK,Thread Group 1-16,text,true,,19226,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,70,0,31
+1765763569124,244,HTTP Request,400,Bad Request,Thread Group 1-17,text,false,,668,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,244,0,31
+1765763570325,434,HTTP Request,400,Bad Request,Thread Group 1-18,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,434,0,44
+1765763571526,268,HTTP Request,400,Bad Request,Thread Group 1-19,text,false,,657,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,268,0,31
+1765763572726,255,HTTP Request,400,Bad Request,Thread Group 1-20,text,false,,657,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,254,0,32
+1765763573907,101,HTTP Request,200,OK,Thread Group 1-21,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,71,0,31
+1765763575110,114,HTTP Request,200,OK,Thread Group 1-22,text,true,,19287,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,85,0,50
+1765763576311,103,HTTP Request,200,OK,Thread Group 1-23,text,true,,19188,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,64,0,32
+1765763577510,100,HTTP Request,200,OK,Thread Group 1-24,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,67,0,33
+1765763578708,99,HTTP Request,200,OK,Thread Group 1-25,text,true,,19256,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,70,0,32
+1765763579912,107,HTTP Request,200,OK,Thread Group 1-26,text,true,,19226,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,70,0,38
+1765763581111,300,HTTP Request,400,Bad Request,Thread Group 1-27,text,false,,657,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,300,0,72
+1765763582308,269,HTTP Request,400,Bad Request,Thread Group 1-28,text,false,,657,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,269,0,45
+1765763583507,269,HTTP Request,400,Bad Request,Thread Group 1-29,text,false,,669,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,269,0,31
+1765763584713,251,HTTP Request,400,Bad Request,Thread Group 1-30,text,false,,657,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,251,0,30
+1765763585915,120,HTTP Request,200,OK,Thread Group 1-31,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,71,0,36
+1765763587116,100,HTTP Request,200,OK,Thread Group 1-32,text,true,,19287,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,69,0,31
+1765763588312,93,HTTP Request,200,OK,Thread Group 1-33,text,true,,19195,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,63,0,31
+1765763589511,93,HTTP Request,200,OK,Thread Group 1-34,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,66,0,31
+1765763590710,93,HTTP Request,200,OK,Thread Group 1-35,text,true,,19257,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,64,0,32
+1765763591909,101,HTTP Request,200,OK,Thread Group 1-36,text,true,,19255,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,66,0,33
+1765763593110,250,HTTP Request,400,Bad Request,Thread Group 1-37,text,false,,658,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,250,0,32
+1765763594309,257,HTTP Request,400,Bad Request,Thread Group 1-38,text,false,,658,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,257,0,31
+1765763595518,253,HTTP Request,400,Bad Request,Thread Group 1-39,text,false,,657,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,253,0,33
+1765763596709,258,HTTP Request,400,Bad Request,Thread Group 1-40,text,false,,658,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,258,0,31
+1765763597908,118,HTTP Request,200,OK,Thread Group 1-41,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,76,0,41
+1765763599110,118,HTTP Request,200,OK,Thread Group 1-42,text,true,,19295,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,85,0,39
+1765763600309,105,HTTP Request,200,OK,Thread Group 1-43,text,true,,19188,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,67,0,34
+1765763601509,99,HTTP Request,200,OK,Thread Group 1-44,text,true,,19198,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,65,0,30
+1765763602709,93,HTTP Request,200,OK,Thread Group 1-45,text,true,,19256,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,63,0,31
+1765763603908,107,HTTP Request,200,OK,Thread Group 1-46,text,true,,19226,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,77,0,31
+1765763605109,248,HTTP Request,400,Bad Request,Thread Group 1-47,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,248,0,31
+1765763606309,243,HTTP Request,400,Bad Request,Thread Group 1-48,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,243,0,31
+1765763607507,244,HTTP Request,400,Bad Request,Thread Group 1-49,text,false,,669,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,243,0,30
+1765763608709,241,HTTP Request,400,Bad Request,Thread Group 1-50,text,false,,670,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,241,0,29
+1765763609906,312,HTTP Request,200,OK,Thread Group 1-51,text,true,,19254,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,223,0,143
+1765763611108,335,HTTP Request,200,OK,Thread Group 1-52,text,true,,19287,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,247,0,100
+1765763612308,589,HTTP Request,200,OK,Thread Group 1-53,text,true,,19188,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,503,0,421
+1765763613509,441,HTTP Request,200,OK,Thread Group 1-54,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,361,0,276
+1765763614711,94,HTTP Request,200,OK,Thread Group 1-55,text,true,,19256,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,64,0,32
+1765763615915,102,HTTP Request,200,OK,Thread Group 1-56,text,true,,19226,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,72,0,34
+1765763617099,253,HTTP Request,400,Bad Request,Thread Group 1-57,text,false,,668,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,253,0,39
+1765763618309,330,HTTP Request,400,Bad Request,Thread Group 1-58,text,false,,670,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,330,0,36
+1765763619509,252,HTTP Request,400,Bad Request,Thread Group 1-59,text,false,,668,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,252,0,35
+1765763620723,245,HTTP Request,400,Bad Request,Thread Group 1-60,text,false,,669,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,245,0,31
+1765763621909,103,HTTP Request,200,OK,Thread Group 1-61,text,true,,19255,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,70,0,34
+1765763623107,97,HTTP Request,200,OK,Thread Group 1-62,text,true,,19302,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,65,0,31
+1765763624309,127,HTTP Request,200,OK,Thread Group 1-63,text,true,,19195,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,85,0,49
+1765763625513,100,HTTP Request,200,OK,Thread Group 1-64,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,65,0,32
+1765763626708,127,HTTP Request,200,OK,Thread Group 1-65,text,true,,19256,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,97,0,65
+1765763627911,166,HTTP Request,200,OK,Thread Group 1-66,text,true,,19242,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,125,0,93
+1765763629109,396,HTTP Request,400,Bad Request,Thread Group 1-67,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,396,0,39
+1765763630300,264,HTTP Request,400,Bad Request,Thread Group 1-68,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,264,0,48
+1765763631502,244,HTTP Request,400,Bad Request,Thread Group 1-69,text,false,,668,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,244,0,31
+1765763632701,248,HTTP Request,400,Bad Request,Thread Group 1-70,text,false,,668,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,248,0,33
+1765763633905,181,HTTP Request,200,OK,Thread Group 1-71,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,111,0,65
+1765763635127,140,HTTP Request,200,OK,Thread Group 1-72,text,true,,19287,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,100,0,47
+1765763636324,97,HTTP Request,200,OK,Thread Group 1-73,text,true,,19195,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,67,0,30
+1765763637511,107,HTTP Request,200,OK,Thread Group 1-74,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,76,0,43
+1765763638726,121,HTTP Request,200,OK,Thread Group 1-75,text,true,,19249,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,71,0,31
+1765763639910,102,HTTP Request,200,OK,Thread Group 1-76,text,true,,19226,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,69,0,35
+1765763641109,246,HTTP Request,400,Bad Request,Thread Group 1-77,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,246,0,32
+1765763642311,239,HTTP Request,400,Bad Request,Thread Group 1-78,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,239,0,30
+1765763643508,332,HTTP Request,400,Bad Request,Thread Group 1-79,text,false,,658,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,332,0,104
+1765763644708,292,HTTP Request,400,Bad Request,Thread Group 1-80,text,false,,668,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,290,0,76
+1765763645909,125,HTTP Request,200,OK,Thread Group 1-81,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,93,0,55
+1765763647110,101,HTTP Request,200,OK,Thread Group 1-82,text,true,,19301,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,72,0,31
+1765763648308,98,HTTP Request,200,OK,Thread Group 1-83,text,true,,19188,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,67,0,32
+1765763649508,111,HTTP Request,200,OK,Thread Group 1-84,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,78,0,33
+1765763650708,105,HTTP Request,200,OK,Thread Group 1-85,text,true,,19249,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,71,0,39
+1765763651911,109,HTTP Request,200,OK,Thread Group 1-86,text,true,,19248,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,77,0,35
+1765763653110,274,HTTP Request,400,Bad Request,Thread Group 1-87,text,false,,657,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,273,0,32
+1765763654310,244,HTTP Request,400,Bad Request,Thread Group 1-88,text,false,,669,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,244,0,31
+1765763655510,251,HTTP Request,400,Bad Request,Thread Group 1-89,text,false,,668,209,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,251,0,32
+1765763656704,244,HTTP Request,400,Bad Request,Thread Group 1-90,text,false,,670,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,244,0,30
+1765763657904,100,HTTP Request,200,OK,Thread Group 1-91,text,true,,19247,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montevideo&dt=2025-12-24&days=1,71,0,31
+1765763659103,102,HTTP Request,200,OK,Thread Group 1-92,text,true,,19295,206,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandu&dt=2025-12-24&days=1,71,0,31
+1765763660304,96,HTTP Request,200,OK,Thread Group 1-93,text,true,,19195,203,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Salto&dt=2025-12-24&days=1,62,0,32
+1765763661504,129,HTTP Request,200,OK,Thread Group 1-94,text,true,,19190,204,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Rivera&dt=2025-12-24&days=1,99,0,33
+1765763662704,97,HTTP Request,200,OK,Thread Group 1-95,text,true,,19249,207,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Maldonado&dt=2025-12-24&days=1,64,0,32
+1765763663904,112,HTTP Request,200,OK,Thread Group 1-96,text,true,,19233,208,5,5,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Tacuarembo&dt=2025-12-24&days=1,66,0,33
+1765763665104,258,HTTP Request,400,Bad Request,Thread Group 1-97,text,false,,668,208,4,4,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Montefideo&dt=2025-12-24&days=1,258,0,34
+1765763666303,249,HTTP Request,400,Bad Request,Thread Group 1-98,text,false,,670,208,3,3,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=Paysandoom&dt=2025-12-24&days=1,249,0,30
+1765763667504,262,HTTP Request,400,Bad Request,Thread Group 1-99,text,false,,670,209,2,2,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=CasaDeSanta&dt=2025-12-24&days=1,262,0,48
+1765763668705,245,HTTP Request,400,Bad Request,Thread Group 1-100,text,false,,669,207,1,1,http://api.weatherapi.com/v1/forecast.json?key=082660052cdb413ca0f04613251512&q=VillaNoel&dt=2025-12-24&days=1,245,0,31
