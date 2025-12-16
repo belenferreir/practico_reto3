@@ -1,0 +1,11 @@
+RESULTADOS DE LA PRUEBA DE PERFORMANCE
+
+Tiempo de respuesta promedio: 323.59 ms
+
+Throughput: 18.70 req/s
+
+Total de requests: 2299
+
+Respuestas 200 (OK): 1322
+
+Respuestas 400 (Bad Request): 977
